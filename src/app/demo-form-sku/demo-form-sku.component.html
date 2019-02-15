@@ -1,0 +1,21 @@
+<!-- <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+  <label for="skuInput">SKU INPUT</label>
+  <input type="text" id="skuInput" placeholder="SKU" name="sku" ngModel>
+
+  <button type="submit">Submitt</button>
+</form> -->
+
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)" [class.error]="!myForm.valid && myForm.touched">
+  <label for="skuInput">SKU INPUT</label>
+  <input type="text" id="skuInput" placeholder="SKU" name="sku" [formControl]="myForm.controls['sku']">
+
+  <div *ngIf="myForm.controls.sku.hasError('invalidSku') && myForm.controls.sku.touched">
+    NOT STARTING WITH 123
+  </div>
+  <!--
+  <div [class.error]="!sku.valid && sku.touched"> ye backgroup red ho jeyga invalid hai to</div>
+  <div *ngIf="!sku.valid">SKU is invalid</div>-->
+  <div *ngIf="myForm.controls.sku.hasError('required')">SKU is required sirr</div>
+  
+  <button type="submit">Submitt</button>
+</form>
